@@ -50,12 +50,28 @@
                     <div class="collapse navbar-collapse" id="navbarColor02">
                         <ul class="navbar-nav me-auto">
                           <li class="nav-item">
+                            @if (Request::is('home'))
                             <a class="nav-link active" href={{ route('home') }}>Home
-                              <span class="visually-hidden">(current)</span>
+                              {{-- <span class="visually-hidden">(current)</span> --}}
                             </a>
+                            @else
+                            <a class="nav-link" href={{ route('home') }}>Home</a>
+                            @endif
                           </li>                          
                           <li class="nav-item">
-                            <a class="nav-link" href="{{"/showGroceryList/1"}}">Grocery List</a>
+                            @if (Request::is('showGroceryList/*'))
+                            <a class="nav-link active" href="{{ route('groceryList',[Auth::user()->id]) }}">Grocery List</a>
+                            {{-- <a class="nav-link" href="{{"showGroceryList/" .Auth::user()->id}}">Grocery List</a> --}}
+                            @else
+                            <a class="nav-link" href="{{ route('groceryList',[Auth::user()->id]) }}">Grocery List</a>
+                            @endif
+                          </li>
+                          <li class="nav-item">
+                            @if (Request::is('findPreference'))
+                            <a class="nav-link active" href="{{ route('findPreference') }}">Preference</a>
+                            @else
+                            <a class="nav-link" href="{{ route('findPreference') }}">Preference</a>
+                            @endif
                           </li>
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Grocery Products</a>

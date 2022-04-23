@@ -27,8 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $userId = Auth::user()->id;
-        //$data=Grocery_List::findOrFail($userId);
-        $data = Grocery_List::find($userId);
-        return view('home', ['groceryData' => $data]);
+        $groceryList = User::find($userId)->grocery_list;
+        return view('home', ['groceryData' => $groceryList]);
+
+        // $userId = Auth::user()->id;
+        // $data = Grocery_List::find($userId);
+        // return view('home', ['groceryData' => $data]);
     }
 }

@@ -24,12 +24,21 @@ Auth::routes();
  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // User action
-Route::get('/showGroceryList/{id}', [App\Http\Controllers\GroceryListController::class, 'showGroceryList']);
-Route::get('/setPreferencePage', [App\Http\Controllers\GroceryListController::class, 'setPreferencePage']);
+Route::get('/groceryLists', [App\Http\Controllers\GroceryListProductController::class, 'index']);
+Route::get('/showGroceryList/{id}', [App\Http\Controllers\GroceryListController::class, 'showGroceryList'])->name('groceryList');
+Route::get('/updateGroceryList/{id}', [App\Http\Controllers\GroceryListProductController::class, 'updateGroceryList'])->name('updateGroceryList');
+Route::get('/deleteGroceryListProduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'deleteGroceryListProduct'])->name('deleteGroceryListProduct');
+//Route::get('/setPreferencePage', [App\Http\Controllers\GroceryListController::class, 'setPreferencePage']);
+
+// Preference Action
+Route::get('/findPreference', [App\Http\Controllers\UserController::class, 'findPreference'])->name('findPreference');
 Route::post('/setPreference', [App\Http\Controllers\GroceryListController::class, 'create']);
+Route::get('/updatePreference/{id}', [App\Http\Controllers\GroceryListController::class, 'updatePreference'])->name('updatePreference');
+Route::post('/updatePreference/{id}', [App\Http\Controllers\GroceryListController::class, 'updatePreference'])->name('updatePreference');
+Route::get('/preferencePage', [App\Http\Controllers\UserController::class, 'preferencePage']);
+
 Route::get('/findUser', [App\Http\Controllers\GroceryListController::class, 'findUser']);
 Route::get('/getProducts', [App\Http\Controllers\GroceryListController::class, 'getProducts']);
-
 Route::get('/storeInCSV', [App\Http\Controllers\GroceryListController::class, 'storeInCSV']);
 // Grocery list action
 // Route::post('/{id}', [App\Http\Controllers\GroceryListController::class, 'update'])->name('update');

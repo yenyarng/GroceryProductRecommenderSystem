@@ -16,7 +16,7 @@ class GroceryListSeeder extends Seeder
     public function run()
     {
         DB::table('grocerylists')->insert([
-            'user_id' => 1,
+            'user_id' => 4,
             'user_pax' => 2,
             'meal_num' => 1,
         ]);

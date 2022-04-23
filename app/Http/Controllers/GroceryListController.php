@@ -44,7 +44,10 @@ class GroceryListController extends Controller
     {
         $groceryList = Grocery_List::create($req->all());
         $groceryList->save();
-        return view('home');
+        // $userId = Auth::user()->id;
+        // $data = Grocery_List::find($userId);
+        // return view('home', ['groceryData' => $data]);
+        return redirect()->route('home');
     }
 
     /**
@@ -109,26 +112,8 @@ class GroceryListController extends Controller
             ->join('products', 'grocerylist_products.product_id', '=', 'products.id')
             ->where('grocerylist_id', $id)
             ->get();
-        //return $groceryLists;
-        return view('/groceryList', ['groceryLists' => $groceryLists]);
-
-
-        // foreach($groceryLists->grocerylist_products as $product)
-        // {
-        //     $product_id = $product->product_id;
-        //     $products = GroceryListProduct::find($product_id)->products;
-        // }
-        // if($groceryLists){
-        //     $groceryListProduct = Grocery_List::find($id)->grocerylist_products;
-        //     $products = GroceryListProduct::find()
-        // }
-        // else{
-
-        // }
-        // dd($groceryLists);
-        //return view('/groceryList', ['groceryLists' => $groceryLists]);
-        //return view('/home')->with('data',$data)
-        //return Grocery_List::find($id)->grocerylist_products;
+        // return $groceryLists;
+        return view('groceryList', ['groceryLists' => $groceryLists]);
     }
 
     /**
@@ -149,11 +134,24 @@ class GroceryListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function showPreferenceUpdatePage($id)
+    {
+        // $userId = Auth::user()->id;
+        $groceryList = User::find($id)->grocery_list;
+        if(is_null($groceryList)){
+            return view('setNewPreferencePage', ['groceryData' => $groceryList]);
+        }
+        else{
+            return view('setPreferencePage', ['groceryData' => $groceryList]);
+        }
+    }
+
+    public function updatePreference(Request $request, $id)
     {
         $data = Grocery_List::find($id);
         $data->update($request->all());
-        return $data;
+        // return view('home', ['groceryData' => $data]);
+        return redirect()->route('home');
     }
 
     /**
@@ -193,7 +191,6 @@ class GroceryListController extends Controller
     public function setPreferencePage()
     {
         $userId = Auth::user()->id;
-        //$data=Grocery_List::findOrFail($userId);
         $data = Grocery_List::find($userId);
         return view('setPreferencePage', ['groceryData' => $data]);
     }

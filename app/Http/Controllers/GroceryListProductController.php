@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\GroceryListProduct;
+use App\Models\Grocery_List;
+use Illuminate\Support\Facades\Auth;
 
 class GroceryListProductController extends Controller
 {
@@ -71,9 +74,39 @@ class GroceryListProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateGroceryList($id)
     {
-        //
+        // $groceryLists = DB::table('grocerylist_products')
+        // ->join('grocerylists', 'grocerylist_products.grocerylist_id', '=' ,'grocerylists.id')
+        // ->get();
+        // $data = $groceryLists::find($id);
+
+        // $groceryLists = DB::table('grocerylist_products')
+        // // ->selectRaw('grocerylist_products.id as id, products.id = product_id')
+        // ->join('products', 'grocerylist_products.product_id', '=', 'products.id')
+        // ->where('grocerylist_id', Auth::user()->id)
+        // ->get();
+
+        // $groceryLists = DB::statement('');
+
+        $data = GroceryListProduct::find($id);
+        // return $groceryLists;
+        
+        if ($data->checked == "0")
+        {
+            // make it to checked = 1
+            $data->update(['checked' => "1"]);
+
+        }
+        else if ($data->checked == "1")
+        {
+            // make it to checked = 0
+            $data->update(['checked' => "0"]);
+
+        }
+        // return view('home', ['groceryData' => $data]);
+        // return redirect()->route('home');
+        return redirect()->back();
     }
 
     /**
@@ -82,8 +115,10 @@ class GroceryListProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteGroceryListProduct($id)
     {
-        //
+        $data = GroceryListProduct::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 }

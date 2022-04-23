@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('grocerylist_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('quantity');
+            $table->boolean('checked')->default(0);
             $table->timestamps();
         });
     }

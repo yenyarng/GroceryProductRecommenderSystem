@@ -11,7 +11,7 @@ class GroceryListProduct extends Model
 {
     use HasFactory;
     protected $table =  "grocerylist_products";
-    protected $fillable = ['grocerylist_id', 'product_id', 'quantity'];
+    protected $fillable = ['grocerylist_id', 'product_id', 'quantity', 'checked'];
 
     public function grocery_lists(){
         return $this->belongsToMany(Grocery_List::class);

@@ -45,8 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // User has many grocery list
-    public function grocery_lists(){
-        return $this->hasMany(Grocery_List::class);
+    // User has one grocery list
+    public function grocery_list(){
+        return $this->hasOne(Grocery_List::class);
     }
 }

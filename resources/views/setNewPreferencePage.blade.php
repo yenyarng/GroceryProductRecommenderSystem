@@ -5,25 +5,25 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Set Preference') }}</div>
+                    <div class="card-header">{{ __('Set New Preference') }}</div>
                     @include('preferencePage')
                     <div class="card-body">
-                        <form action="/updatePreference/{{$groceryData->id}}" method="POST">
-                            {{-- <form action="{{ url('updatePreference',[$groceryData->id]) }}" method="POST"> --}}
+                        <form action="/setPreference" method="POST">
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" , name="user_id" , value={{ Auth::user()->id }}> <br><br>
                                 <label class="col-form-label mt-4" for="inputDefault">User Pax</label>
-                                <input type="text" class="form-control" placeholder="Input user pax" id="inputDefault" name="user_pax" value={{$groceryData->user_pax}}>
+                                <input type="text" class="form-control" placeholder="Input user pax" id="inputDefault" name="user_pax">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label mt-4" for="inputDefault">Meal Number</label>
-                                <input type="text" class="form-control" placeholder="Input meal number" id="inputDefault" name="meal_num" value={{$groceryData->meal_num}}>
+                                <input type="text" class="form-control" placeholder="Input meal number" id="inputDefault" name="meal_num">
                             </div>
-                            <br>
+                            <div class="card-body">
                                 <div class="col text-center">
-                                    <button type="submit" style="width:150px " class="btn btn-primary">Save</button>
+                                    <button type="submit" style="width:150px" class="btn btn-primary">Save</button>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>

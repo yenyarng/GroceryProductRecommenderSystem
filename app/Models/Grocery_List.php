@@ -17,9 +17,14 @@ class Grocery_List extends Model
 
     // Grocery List has many products
     public function products(){
-        //return $this->hasMany(Product::class);
-        return $this->belongsToMany(Product::class);
-        //return $this->belongsToMany(Product::class, 'grocery_products','grocerylist_id', 'product_id')->withPivot('quantity');
+        // return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(
+            Product::class,
+            'grocerylist_products',
+            'grocerylist_id',
+            'product_id'
+        )->withPivot('quantity');
+
     }
 
     // Grocery List belongs to a user

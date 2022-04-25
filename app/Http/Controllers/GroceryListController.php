@@ -105,15 +105,19 @@ class GroceryListController extends Controller
      */
     public function showGroceryList($id)
     {
-        //$groceryLists = Grocery_List::find($id);
-        //return $groceryLists->grocerylist_products;
-        //$groceryListsProducts = $groceryLists->grocerylist_products;
+        $user = Auth::user();
+        $groceryListId = $user->grocery_list->id;
         $groceryLists = DB::table('grocerylist_products')
-            ->join('products', 'grocerylist_products.product_id', '=', 'products.id')
-            ->where('grocerylist_id', $id)
-            ->get();
+        ->selectRaw('grocerylist_products.id as id, products.id as product_id, products.name as product_name, grocerylist_products.quantity as quantity, grocerylist_products.checked as checked')
+        ->join('products', 'grocerylist_products.product_id', '=', 'products.id')
+        ->where('grocerylist_id', $groceryListId)
+        ->get();
         // return $groceryLists;
         return view('groceryList', ['groceryLists' => $groceryLists]);
+
+        // $user = Auth::user();
+        // $groceryList = $user->grocery_list->id;
+        // return $groceryList;
     }
 
     /**

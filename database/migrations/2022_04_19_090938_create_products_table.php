@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_path');
-            $table->string('desc');
+            $table->longText('image_path');
+            $table->longText('desc');
             $table->longText('overview');
             $table->foreignId('product_category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

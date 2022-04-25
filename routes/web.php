@@ -20,20 +20,22 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
- Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // User action
 Route::get('/groceryLists', [App\Http\Controllers\GroceryListProductController::class, 'index']);
 Route::get('/showGroceryList/{id}', [App\Http\Controllers\GroceryListController::class, 'showGroceryList'])->name('groceryList');
-Route::get('/updateGroceryList/{id}', [App\Http\Controllers\GroceryListProductController::class, 'updateGroceryList'])->name('updateGroceryList');
+Route::post('/addToGroceryList', [App\Http\Controllers\GroceryListProductController::class, 'addToGroceryList'])->name('addToGroceryList');
+Route::get('/checkGroceryListProduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'checkGroceryListProduct'])->name('checkGroceryListProduct');
+Route::post('/updateGroceryListProduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'updateGroceryListProduct'])->name('updateGroceryListProduct');
 Route::get('/deleteGroceryListProduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'deleteGroceryListProduct'])->name('deleteGroceryListProduct');
 //Route::get('/setPreferencePage', [App\Http\Controllers\GroceryListController::class, 'setPreferencePage']);
 
 // Preference Action
 Route::get('/findPreference', [App\Http\Controllers\UserController::class, 'findPreference'])->name('findPreference');
 Route::post('/setPreference', [App\Http\Controllers\GroceryListController::class, 'create']);
-Route::get('/updatePreference/{id}', [App\Http\Controllers\GroceryListController::class, 'updatePreference'])->name('updatePreference');
+// Route::get('/updatePreference/{id}', [App\Http\Controllers\GroceryListController::class, 'updatePreference'])->name('updatePreference');
 Route::post('/updatePreference/{id}', [App\Http\Controllers\GroceryListController::class, 'updatePreference'])->name('updatePreference');
 Route::get('/preferencePage', [App\Http\Controllers\UserController::class, 'preferencePage']);
 

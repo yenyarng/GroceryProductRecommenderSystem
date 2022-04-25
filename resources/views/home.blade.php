@@ -8,18 +8,9 @@
                     <div class="card-header">{{ __('Home') }}</div>
                     @include('preferencePage')
                     <div class="card-body">
-                        <div class="col text-center">
-                            <form action="findPreference" method="GET">
-                                <button type="submit"  style="width:150px" class="btn btn-primary">Set preference</button>
-                            </form>             
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="col text-center">
-                            <form action="showGroceryList/{{ Auth::user()->id }}" method="GET">
-                                <button type="submit" style="width:150px" class="btn btn-primary">View Grocery List</button>
-                            </form>
-                        </div>
+                    <a href="{{ route('findPreference') }}" class="card-link">Set Preference</a>
+                    <a href="showGroceryList/{{ Auth::user()->id }}" class="card-link">View Grocery List</a>
+                    <a href="#" class="card-link">View Grocery Product</a>
                     </div>
                 </div>
             </div>

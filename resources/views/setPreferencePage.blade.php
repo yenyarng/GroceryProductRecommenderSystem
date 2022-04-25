@@ -9,15 +9,14 @@
                     @include('preferencePage')
                     <div class="card-body">
                         <form action="/updatePreference/{{$groceryData->id}}" method="POST">
-                            {{-- <form action="{{ url('updatePreference',[$groceryData->id]) }}" method="POST"> --}}
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" , name="user_id" , value={{ Auth::user()->id }}> <br><br>
-                                <label class="col-form-label mt-4" for="inputDefault">User Pax</label>
+                                <label class="col-form-label" for="inputDefault">User Pax</label>
                                 <input type="text" class="form-control" placeholder="Input user pax" id="inputDefault" name="user_pax" value={{$groceryData->user_pax}}>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label mt-4" for="inputDefault">Meal Number</label>
+                                <label class="col-form-label mt-2" for="inputDefault">Meal Number</label>
                                 <input type="text" class="form-control" placeholder="Input meal number" id="inputDefault" name="meal_num" value={{$groceryData->meal_num}}>
                             </div>
                             <br>

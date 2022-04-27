@@ -19,35 +19,6 @@ class UserController extends Controller
         return view('home', compact('groceryLists'));
     }
 
-    public function runPython()
-    {
-        // $param = "hellofrompython";
-        // $param2 = "param2";
-
-        // $result = shell_exec("python C:\Users\yenya\OneDrive\Desktop\GroceryProductRecommenderSystem\public\pythonfile\\testRunPython.py $param $param2");
-        // return $result;
-        // $process = new Process(['python', 'C:\Users\yenya\OneDrive\Desktop\testRunPython.py']); 
-        // //$output_data = system('/public/pythonfile/testRunPython.py');
-        // //$process = new Process(['python', 'C:\Users\yenya\OneDrive\Desktop\GroceryProductRecommenderSystem\public\pythonfile\\testRunPython.py']);
-        // $process->run();
-
-        // // executes after the command finishes
-        // if (!$process->isSuccessful()) {
-        //     throw new ProcessFailedException($process);
-        // }
-
-        // $output_data = $process->getOutput();
-        // return $output_data;
-
-        // $output_data = system('python C:\Users\yenya\OneDrive\Desktop\GroceryProductRecommenderSystem\public\pythonfile\\testRunPython.py');
-        // return $output_data;
-
-        //$result = shell_exec("python C:\Users\yenya\OneDrive\Desktop\\recommendQuantity2.py ");
-        $result = shell_exec("python C:\Users\yenya\OneDrive\Desktop\\recommendQuantity2.py 2>&1");
-        return $result;
-    
-    }
-
     public function findPreference()
     {
         $userId = Auth::user()->id;

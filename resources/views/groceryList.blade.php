@@ -54,7 +54,7 @@
                             </table>
                         @endif
                         <a href="{{ route('home') }}" class="card-link">Home</a>
-                        <a href="#" class="card-link">View Grocery Products</a>
+                        <a href="{{ route('products.index') }}" class="card-link">View Grocery Products</a>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                     <div class="card-body">
                     <a href="{{ route('findPreference') }}" class="card-link">Set Preference</a>
                     <a href="showGroceryList/{{ Auth::user()->id }}" class="card-link">View Grocery List</a>
-                    <a href="#" class="card-link">View Grocery Product</a>
+                    <a href="{{ route('products.index') }}" class="card-link">View Grocery Product</a>
                     </div>
                 </div>
             </div>

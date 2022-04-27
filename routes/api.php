@@ -32,6 +32,6 @@ Route::delete('grocerylist/{id}', [App\Http\Controllers\GroceryListController::c
 
 // API for GroceryList Product
 Route::post('grocerylistproduct', [App\Http\Controllers\GroceryListProductController::class, 'create']);
-Route::get('grocerylistproducts', [App\Http\Controllers\GroceryListProductController::class, 'index']);
+Route::get('grocerylistproducts', [App\Http\Controllers\GroceryListProductController::class, 'indexForRecommendQuantity']);
 Route::put('grocerylistproduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'update']);
 Route::delete('grocerylistproduct/{id}', [App\Http\Controllers\GroceryListProductController::class, 'destory']);

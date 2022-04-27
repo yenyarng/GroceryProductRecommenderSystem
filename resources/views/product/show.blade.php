@@ -6,8 +6,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
                     <li class="breadcrumb-item active">{{ $product['name'] }}</li>
                 </ol>
                 <div class="card">
@@ -24,11 +24,17 @@
                         <div class="card-body">
                             <hr class="mt-2 mb-4">
                             <h5 class="card-title">Add to your grocery list</h5>
-                            <h6 class="card-text">Recommended Quantity: tbc</h6>
-                            <form action="{{ route('addToGroceryList')}}" method="POST">
+                            <h6 class="card-text">Recommended Quantity:
+                                @if ($recommendQuantity == '0')
+                                    {{ 'No recommendation' }}
+                                @else
+                                    {{ $recommendQuantity }}
+                                @endif
+                            </h6>
+                            <form action="{{ route('addToGroceryList') }}" method="POST">
                                 @csrf
-                                <input type="hidden", name="checked", value="0"> 
-                                <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                                <input type="hidden" , name="checked" , value="0">
+                                <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
                                 <div class="form-group mb-3">
                                     <label class="form-label mt-4" for="quantity">Select Quantity</label>
                                     <select class="form-select" id="quantity" name="quantity">
@@ -84,36 +90,18 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">You might also like</h4>
-                            <p class="card-text">Recommender products to user</p>
-
+                            <p class="card-text">Related products</p>
                             <hr class="mt-2 mb-5">
-
                             <div class="row text-center text-lg-start">
-
-                                <div class="col-lg-3 col-md-4 col-6">
-                                    <a href="#" class="d-block mb-4 h-100">
-                                        <img class="img-fluid img-thumbnail"
-                                            src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-6">
-                                    <a href="#" class="d-block mb-4 h-100">
-                                        <img class="img-fluid img-thumbnail"
-                                            src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-6">
-                                    <a href="#" class="d-block mb-4 h-100">
-                                        <img class="img-fluid img-thumbnail"
-                                            src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-6">
-                                    <a href="#" class="d-block mb-4 h-100">
-                                        <img class="img-fluid img-thumbnail"
-                                            src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
-                                    </a>
-                                </div>
+                                @foreach ($productLists as $productList)
+                                    <div class="col-lg-3 col-md-4 col-6 ">
+                                        <a href="{{ route('products.show', ['product' => $productList->id]) }}"
+                                            class="d-block mb-4 h-100">
+                                            <img class="img-fluid img-thumbnail" src="{{ $productList->image_path }}"
+                                                alt="" style="width: auto; height: 195px;">
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

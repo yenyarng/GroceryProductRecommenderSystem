@@ -29,6 +29,13 @@ class GroceryListProductController extends Controller
         return $groceryLists;
     }
 
+    public function indexForRecommendQuantity(){
+        $data = DB::table('grocerylist_products')
+        ->join('grocerylists', 'grocerylist_products.grocerylist_id', '=', 'grocerylists.id')
+        ->get();
+        return  $data;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,6 +59,7 @@ class GroceryListProductController extends Controller
 
         $user = $request->user();
         $groceryListId = $user->grocery_list->id ?? null;
+
 
         if(!$groceryListId) {
             Grocery_List::create([
